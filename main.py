@@ -1,7 +1,6 @@
-import openpyxl as opxl
+import os
 import json
-
-data = []
+import openpyxl as opxl
 
 def execPgm():
     try:
@@ -19,18 +18,41 @@ def execPgm():
     actSheet = wb.active
     print(actSheet.title)
 
-    #change sheet name and color
+    # change sheet name and color
     actSheet.title = "First sheet"
     actSheet.sheet_properties.tabColor = "1072BA"
 
-    #default sheet title define and append to excel
-    defaultSheetTitles = ["title1", "title2", "title3"]
+    # Open json data and transfer data format from json to list[dict1, dict2, ...]
+    jsonFilePath = './Database/salary.json'
+    exists = os.path.isfile(jsonFilePath)
+    if not exists:
+        return
+    f = open(jsonFilePath, encoding="utf-8")
+    data = json.load(f)
+    f.close()
 
-    #Insert titles at row1
+    print(data[0])
+    # get default sheet title and append to excel
+    print(data[0].keys())
+    defaultSheetTitles = data[0].keys()
+    defaultSheetTitlesDict = {}
+    for index, i in enumerate(defaultSheetTitles):
+        tempKey = i
+        tempVal = index + 1
+        defaultSheetTitlesDict[tempKey] = tempVal
+    print(defaultSheetTitlesDict)
+    # insert titles at row1
     for index, x in enumerate(defaultSheetTitles):
-        actSheet.cell(row = 1, column = (index+1), value = x)
+        actSheet.cell(row = 1, column = index + 1, value = x)
+
+    # insert the real data
+    # loop every subData and insert every subData's element to dedicated site
+    for i, subData in enumerate(data):
+        for subTitles in defaultSheetTitles:
+            actSheet.cell(row = i + 2, column = defaultSheetTitlesDict[subTitles], value = subData[subTitles])
+
     
-    
+
     wb.save('sample.xlsx')
 
 if __name__ == "__main__":
