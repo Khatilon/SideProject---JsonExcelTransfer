@@ -31,16 +31,19 @@ def execPgm():
     data = json.load(f)
     f.close()
 
+    # get default sheet title and generate titles dict and append to excel
     print(data[0])
-    # get default sheet title and append to excel
     print(data[0].keys())
+
     defaultSheetTitles = data[0].keys()
     defaultSheetTitlesDict = {}
+
     for index, i in enumerate(defaultSheetTitles):
         tempKey = i
         tempVal = index + 1
         defaultSheetTitlesDict[tempKey] = tempVal
     print(defaultSheetTitlesDict)
+
     # insert titles at row1
     for index, x in enumerate(defaultSheetTitles):
         actSheet.cell(row = 1, column = index + 1, value = x)
