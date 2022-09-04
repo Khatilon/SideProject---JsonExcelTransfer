@@ -26,11 +26,11 @@ def execPgm():
     #default sheet title define and append to excel
     defaultSheetTitles = ["title1", "title2", "title3"]
 
+    #Insert titles at row1
     for index, x in enumerate(defaultSheetTitles):
-        print(x)
         actSheet.cell(row = 1, column = (index+1), value = x)
     
-
+    
     wb.save('sample.xlsx')
 
 if __name__ == "__main__":
