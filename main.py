@@ -35,7 +35,7 @@ def execPgm():
     print(data[0])
     print(data[0].keys())
 
-    defaultSheetTitles = data[0].keys()
+    defaultSheetTitles = data[0].keys() #Notice!! The data[0] should have full keys, otherwise it will lead the lack of sheetTitles. 
     defaultSheetTitlesDict = {}
 
     for index, i in enumerate(defaultSheetTitles):
@@ -52,7 +52,9 @@ def execPgm():
     # loop every subData and insert every subData's element to dedicated site
     for i, subData in enumerate(data):
         for subTitles in defaultSheetTitles:
-            actSheet.cell(row = i + 2, column = defaultSheetTitlesDict[subTitles], value = subData[subTitles])
+            # Avoid element lack in the json (Ref to )
+            if (subTitles in subData):
+                actSheet.cell(row = i + 2, column = defaultSheetTitlesDict[subTitles], value = subData[subTitles])
 
     
 
