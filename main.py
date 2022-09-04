@@ -52,7 +52,7 @@ def execPgm():
     # loop every subData and insert every subData's element to dedicated site
     for i, subData in enumerate(data):
         for subTitles in defaultSheetTitles:
-            # Avoid element lack in the json (Ref to )
+            # Avoid element lack in the json (Ref to ./Database/salary_lack.json)
             if (subTitles in subData):
                 actSheet.cell(row = i + 2, column = defaultSheetTitlesDict[subTitles], value = subData[subTitles])
 
