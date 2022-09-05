@@ -1,6 +1,7 @@
 import os
 import json
 import openpyxl as opxl
+# from openpyxl.styles import PatternFill
 
 def execPgm():
     try:
@@ -54,9 +55,10 @@ def execPgm():
         for subTitles in defaultSheetTitles:
             # Avoid element lack in the json (Ref to ./Database/salary_lack.json)
             if (subTitles in subData):
+                # assign value
                 actSheet.cell(row = i + 2, column = defaultSheetTitlesDict[subTitles], value = subData[subTitles])
-
-    
+                # fill the color
+                # actSheet.cell(row = i + 2, column = defaultSheetTitlesDict[subTitles]).fill = opxl.styles.PatternFill(fgColor="FFC7CE", fill_type = "solid")
 
     wb.save('sample.xlsx')
 
